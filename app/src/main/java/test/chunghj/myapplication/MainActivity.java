@@ -151,7 +151,6 @@ public class MainActivity extends ActionBarActivity {
 
         for (i = 0; i < data.length(); i++) {
             for (int j = i; j < data.length(); j++) {
-                //구분자 찾기
                 String str_div = data.substring(i, j + 1); //문자열의 처음부터 차례대로 잘라나감.
                 mTemp = str_div;
 
