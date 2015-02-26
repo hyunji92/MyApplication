@@ -14,15 +14,94 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String test = "ab,cd,ef";
+        String test = "a,bc,de,f";
         String cut = ",";
+
+
         char ch = cut.charAt(0);
 
-        // setSplit(test,cut);
-        Split2(test, ch);
-        //splitAndIndexof(test, ch);
+        //bubblebubble(); 버블소트 정상 작동
+
+        Split2(test);
+
 
     }
+
+    public void bubblebubble() {
+
+        int[] data = {4, 54, 2, 8, 63, 7, 55, 56};
+        int temp;
+        int cnt = 0;
+
+        Log.d("TTT", "======정렬 전===============\n");
+        for (int m = 0; m < data.length; m++) {
+            System.out.print(data[m] + ", ");
+            Log.d("TTT", "" + data[m] + " ,");
+
+        }
+
+        for (int i = data.length; i > 0; i--) {
+            //
+            for (int j = 0; j < i - 1; j++) {
+                cnt++;
+                if (data[j] > data[j + 1]) {
+                    temp = data[j];
+                    data[j] = data[j + 1];
+                    data[j + 1] = temp;
+                }
+            }
+        }
+
+        Log.d("TTT", "======정렬 후===============\n");
+        for (int k = 0; k < data.length; k++) {
+            Log.d("TTT", "" + data[k] + " ,");
+
+        }
+
+        Log.d("TTT", "총 회전수  :  " + cnt);
+
+    }
+
+    void Split2(String test) {
+        int i = 0;
+        //임시저장
+        String mTemp = "";
+
+        //원본 복사
+        String mCopy = test;
+
+        for (i = 0; i < test.length(); i++) {
+            for (int j = i; j < test.length(); j++) {
+                String str_div = test.substring(i, j + 1); //문자열의 처음부터 차례대로 잘라나감.
+                mTemp = str_div;
+
+                String[] arr = new String[test.length()];
+                if (!str_div.equals(",")){
+                    arr[j] = mTemp;
+                    mTemp = arr[j+1];
+                    arr[j+1] = arr[j];
+                    Log.d("TTT", "presb   112!!! : @^  :  " + arr[i]);
+                }
+
+
+                else if (str_div.equals(",")) {
+                    String[] arr2 = new String[test.length()];
+                    arr2[i] = " " + mTemp;
+                    arr2[i] += arr2[i] ;
+                    Log.d("TTT", "presb   114!!! : @^  :  " + arr2[i]);
+
+
+                }
+                //StringBuffer sb = new StringBuffer(mTemp);
+                //String str_div1 = data.substring(i + 1, j +2);
+                //sb.append(str_div1);
+                //Log.d("TTT", "test sb 112!!! : @0  :  " + sb);
+                break;
+
+            }
+        }
+    }
+
 
     public String[] setSplit(String test, String cut) {
         int i = 0;
@@ -58,7 +137,7 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    String data = "ab,cd,ef";
+//    String data = "ab,cd,ef";
 
 
     void Split(String data, char separator) {
@@ -141,41 +220,6 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    void Split2(String data, char separator) {
-        int i = 0;
-        //임시저장
-        String mTemp = "";
-
-        //원본 복사
-        String mCopy = data;
-
-        for (i = 0; i < data.length(); i++) {
-            for (int j = i; j < data.length(); j++) {
-                String str_div = data.substring(i, j + 1); //문자열의 처음부터 차례대로 잘라나감.
-                mTemp = str_div;
-
-                if (str_div.equals(",")) {
-
-                    StringBuffer presb = new StringBuffer();
-                    presb.append(str_div);
-                    Log.d("TTT", "presb   114!!! : @^  :  " + presb);
-
-
-                } else {
-
-                    StringBuffer sb = new StringBuffer();
-                    String str_div1 = data.substring(i + 1, j + 2);
-                    sb.append(mTemp);
-                    sb.append(str_div1);
-                    if (sb.length() == 2) {
-                        Log.d("TTT", "test sb 112!!! : @0  :  " + sb);
-                    }
-                    break;
-                }
-
-            }
-        }
-    }
 
 
     @Override
