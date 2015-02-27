@@ -5,25 +5,47 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+
+    EditText mEditText;
+    Button mButton;
+    TextView mTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String test = "a,bc,de,f";
+        mEditText = (EditText) findViewById(R.id.editText);
+        mButton = (Button) findViewById(R.id.button);
+        mTextView = (TextView) findViewById(R.id.textView);
+        mButton.setOnClickListener(this);
+
+        //String test = "a,bc,de,f";
         String cut = ",";
-
-
         char ch = cut.charAt(0);
 
         //bubblebubble(); 버블소트 정상 작동
 
-        Split2(test);
+//        Split2(test);
 
+
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        String ttest = mEditText.getText().toString();
+//        Editable ttest = mEditText.getText();
+        Split2(ttest);
 
     }
 
@@ -62,32 +84,32 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    void Split2(String test) {
+    public void Split2(String ttest) {
+
         int i = 0;
         //임시저장
         String mTemp = "";
 
         //원본 복사
-        String mCopy = test;
+        String mCopy = ttest;
 
-        for (i = 0; i < test.length(); i++) {
-            for (int j = i; j < test.length(); j++) {
-                String str_div = test.substring(i, j + 1); //문자열의 처음부터 차례대로 잘라나감.
-                mTemp = str_div;
+        for (i = 0; i < ttest.length() + 1; i++) {
+            for (int j = i; j < ttest.length() + 1; j++) {
+                //if (end > 0 && start < end) {
+                    String str_div = ttest.substring(i, j + 1); //문자열의 처음부터 차례대로 잘라나감.
+                    mTemp = str_div;
+                //}
 
-                String[] arr = new String[test.length()];
-                if (!str_div.equals(",")){
+                String[] arr = new String[ttest.length() + 1];
+                if (!str_div.equals(",")) {
                     arr[j] = mTemp;
-                    mTemp = arr[j+1];
-                    arr[j+1] = arr[j];
-                    Log.d("TTT", "presb   112!!! : @^  :  " + arr[i]);
-                }
-
-
-                else if (str_div.equals(",")) {
-                    String[] arr2 = new String[test.length()];
+                    mTemp = arr[j + 1];
+                    arr[j + 1] = arr[j];
+                    Log.d("TTT", "presb   112!!! : @^  :  " + arr[j + 1]);
+                } else if (str_div.equals(",")) {
+                    String[] arr2 = new String[ttest.length() + 1];
                     arr2[i] = " " + mTemp;
-                    arr2[i] += arr2[i] ;
+                    arr2[i] += arr2[i];
                     Log.d("TTT", "presb   114!!! : @^  :  " + arr2[i]);
 
 
@@ -95,11 +117,12 @@ public class MainActivity extends ActionBarActivity {
                 //StringBuffer sb = new StringBuffer(mTemp);
                 //String str_div1 = data.substring(i + 1, j +2);
                 //sb.append(str_div1);
-                //Log.d("TTT", "test sb 112!!! : @0  :  " + sb);
+                mTextView.setText(arr.toString());
                 break;
 
             }
         }
+
     }
 
 
@@ -219,7 +242,6 @@ public class MainActivity extends ActionBarActivity {
         }
 
     }
-
 
 
     @Override
